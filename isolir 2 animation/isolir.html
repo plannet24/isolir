@@ -1,0 +1,632 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Notifikasi Isolir Internet</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #6a11cb;
+            --secondary-color: #2575fc;
+            --danger-color: #ff4757;
+            --warning-color: #ffa502;
+            --success-color: #2ed573;
+            --light-color: #f8f9fa;
+            --dark-color: #2f3542;
+            --border-radius: 15px;
+            --box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            --transition: all 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: #333;
+            line-height: 1.6;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        /* Header dengan animasi */
+        .header {
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+            color: white;
+            padding: 3rem 0;
+            border-radius: 20px;
+            margin-bottom: 2rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            animation: headerSlideDown 1s ease-out;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+
+        .header::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="%23ffffff" fill-opacity="0.1" d="M0,128L48,144C96,160,192,192,288,186.7C384,181,480,139,576,138.7C672,139,768,181,864,197.3C960,213,1056,203,1152,181.3C1248,160,1344,128,1392,112L1440,96L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path></svg>');
+            background-size: cover;
+            background-position: center;
+            animation: wave 20s linear infinite;
+        }
+
+        .header-content {
+            position: relative;
+            z-index: 2;
+        }
+
+        .header h1 {
+            font-size: 3rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+            position: relative;
+            text-shadow: 2px 2px 10px rgba(0,0,0,0.2);
+        }
+
+        .header p {
+            font-size: 1.5rem;
+            opacity: 0.9;
+            position: relative;
+        }
+
+        /* Kartu notifikasi dengan animasi */
+        .notification-card {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+            margin-bottom: 2rem;
+            overflow: hidden;
+            animation: cardSlideUp 0.8s ease-out;
+            transition: var(--transition);
+        }
+
+        .notification-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.15);
+        }
+
+        .card-header {
+            padding: 1.5rem;
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .card-header::after {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transform: translateX(-100%);
+            animation: shimmer 3s infinite;
+        }
+
+        .card-header.bg-success {
+            background: linear-gradient(135deg, var(--success-color) 0%, #1e90ff 100%);
+        }
+
+        .card-header h4 {
+            margin: 0;
+            font-size: 1.5rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .card-body {
+            padding: 2rem;
+        }
+
+        .text-center {
+            text-align: center;
+        }
+
+        /* Alert Icon dengan animasi */
+        .alert-icon {
+            font-size: 5rem;
+            color: var(--danger-color);
+            margin-bottom: 1.5rem;
+            display: inline-block;
+            animation: pulse 2s infinite;
+        }
+
+        /* Typography */
+        h2 {
+            font-size: 2.2rem;
+            color: var(--danger-color);
+            font-weight: 800;
+            margin-bottom: 1.5rem;
+            position: relative;
+        }
+
+        h2::after {
+            content: "";
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 4px;
+            background: linear-gradient(90deg, var(--danger-color), var(--warning-color));
+            border-radius: 2px;
+        }
+
+        h5 {
+            font-size: 1.3rem;
+            margin-bottom: 0.8rem;
+            color: var(--dark-color);
+        }
+
+        .card-text {
+            font-size: 1.2rem;
+            margin-bottom: 1.5rem;
+            line-height: 1.8;
+        }
+
+        /* Tombol dengan animasi */
+        .btn-payment {
+            display: inline-block;
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+            color: white;
+            border: none;
+            padding: 15px 40px;
+            font-size: 1.3rem;
+            font-weight: 700;
+            border-radius: 50px;
+            text-decoration: none;
+            transition: var(--transition);
+            cursor: pointer;
+            margin: 1.5rem 0;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 10px 20px rgba(37, 117, 252, 0.3);
+            animation: pulse 2s infinite 2s;
+        }
+
+        .btn-payment::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+            transition: 0.5s;
+        }
+
+        .btn-payment:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(37, 117, 252, 0.5);
+        }
+
+        .btn-payment:hover::before {
+            left: 100%;
+        }
+
+        /* Alert */
+        .alert {
+            padding: 1.5rem;
+            border-radius: var(--border-radius);
+            margin-top: 1.5rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .alert-warning {
+            background: rgba(255, 165, 2, 0.1);
+            border-left: 5px solid var(--warning-color);
+            color: #856404;
+        }
+
+        .alert strong {
+            color: var(--warning-color);
+        }
+
+        /* Payment Steps dengan animasi berurutan */
+        .payment-steps {
+            background: linear-gradient(135deg, #f1f8ff 0%, #e3f2fd 100%);
+            border-radius: var(--border-radius);
+            padding: 2rem;
+            position: relative;
+        }
+
+        .d-flex {
+            display: flex;
+            margin-bottom: 1.5rem;
+        }
+
+        .step-number {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(135deg, var(--secondary-color) 0%, var(--primary-color) 100%);
+            color: white;
+            border-radius: 50%;
+            margin-right: 15px;
+            flex-shrink: 0;
+            font-weight: bold;
+            box-shadow: 0 5px 15px rgba(37, 117, 252, 0.3);
+        }
+
+        /* Contact Info */
+        .contact-info {
+            background: linear-gradient(135deg, #e9ecef 0%, #f8f9fa 100%);
+            border-radius: var(--border-radius);
+            padding: 1.5rem;
+            margin-top: 1.5rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .contact-info::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 5px;
+            height: 100%;
+            background: linear-gradient(to bottom, var(--primary-color), var(--secondary-color));
+        }
+
+        /* Footer */
+        .footer {
+            background: rgba(47, 53, 66, 0.9);
+            color: white;
+            padding: 2.5rem 0;
+            margin-top: 3rem;
+            text-align: center;
+            border-radius: 20px;
+        }
+
+        /* List Styling */
+        ul {
+            padding-left: 1.2rem;
+        }
+
+        ul.list-unstyled {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        ul.list-unstyled li {
+            margin-bottom: 0.8rem;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+
+        ul.list-unstyled li::before {
+            content: "•";
+            color: var(--secondary-color);
+            font-weight: bold;
+            position: absolute;
+            left: 0;
+        }
+
+        /* Grid System */
+        .row {
+            display: flex;
+            flex-wrap: wrap;
+            margin: 0 -15px;
+        }
+
+        .col-lg-6 {
+            width: 100%;
+            padding: 0 15px;
+            margin-bottom: 2rem;
+        }
+
+        .col-lg-8 {
+            width: 100%;
+            padding: 0 15px;
+        }
+
+        .justify-content-center {
+            justify-content: center;
+        }
+
+        /* Animasi Keyframes */
+        @keyframes headerSlideDown {
+            from {
+                transform: translateY(-100%);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        @keyframes cardSlideUp {
+            from {
+                transform: translateY(50px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        @keyframes pulse {
+            0% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.05);
+            }
+            100% {
+                transform: scale(1);
+            }
+        }
+
+        @keyframes wave {
+            0% {
+                transform: translateX(0);
+            }
+            50% {
+                transform: translateX(-20px);
+            }
+            100% {
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes shimmer {
+            0% {
+                transform: translateX(-100%);
+            }
+            100% {
+                transform: translateX(100%);
+            }
+        }
+
+        /* Floating Elements */
+        .floating {
+            animation: floating 3s ease-in-out infinite;
+        }
+
+        @keyframes floating {
+            0% {
+                transform: translateY(0px);
+            }
+            50% {
+                transform: translateY(-10px);
+            }
+            100% {
+                transform: translateY(0px);
+            }
+        }
+
+        /* Responsive */
+        @media (min-width: 768px) {
+            .header h1 {
+                font-size: 3.5rem;
+            }
+            
+            .col-lg-6 {
+                width: 50%;
+            }
+            
+            .col-lg-8 {
+                width: 66.666667%;
+            }
+        }
+
+        @media (max-width: 767px) {
+            .header {
+                padding: 2rem 0;
+            }
+            
+            .header h1 {
+                font-size: 2.2rem;
+            }
+            
+            .header p {
+                font-size: 1.2rem;
+            }
+            
+            .card-body {
+                padding: 1.5rem;
+            }
+            
+            .btn-payment {
+                width: 100%;
+                text-align: center;
+            }
+            
+            .d-flex {
+                flex-direction: column;
+            }
+            
+            .step-number {
+                margin-bottom: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <div class="header">
+            <div class="header-content">
+                <h1>Notifikasi Pembayaran</h1>
+                <p>Layanan Internet Anda Saat Ini Terisolasi Sementara</p>
+            </div>
+        </div>
+
+        <!-- Notifikasi Utama -->
+        <div class="row justify-content-center">
+            <div class="col-lg-8">
+                <div class="notification-card floating">
+                    <div class="card-body text-center">
+                        <div class="alert-icon">
+                            <i class="fas fa-ban"></i>
+                        </div>
+                        <h2>Pemberitahuan Jatuh Tempo</h2>
+                        <p class="card-text">
+                            Pelanggan yang terhormat, layanan internet Anda untuk saat ini <strong>terisolasi sementara</strong> karena keterlambatan pembayaran.
+                        </p>
+                        <p class="card-text">
+                            Segera lakukan pembayaran dengan mengklik tombol di bawah. Anda akan langsung diarahkan ke halaman pembayaran.
+                        </p>
+                        
+                        <div>
+                            <a href="#" class="btn-payment">
+                                <i class="fas fa-credit-card"></i> BAYAR SEKARANG
+                            </a>
+                        </div>
+                        
+                        <div class="alert alert-warning">
+                            <strong><i class="fas fa-clock"></i> Perhatian:</strong> Layanan internet akan dipulihkan maksimal 1x24 jam setelah pembayaran terkonfirmasi.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Cara Pembayaran -->
+        <div class="row">
+            <div class="col-lg-6">
+                <div class="notification-card floating" style="animation-delay: 0.2s;">
+                    <div class="card-header">
+                        <h4><i class="fas fa-list-ol"></i> Cara Melakukan Pembayaran</h4>
+                    </div>
+                    <div class="card-body payment-steps">
+                        <div class="d-flex">
+                            <span class="step-number">1</span>
+                            <div>
+                                <h5>Klik Tombol "Bayar Sekarang"</h5>
+                                <p>Anda akan diarahkan ke halaman pembayaran online yang aman</p>
+                            </div>
+                        </div>
+                        <div class="d-flex">
+                            <span class="step-number">2</span>
+                            <div>
+                                <h5>Pilih Metode Pembayaran</h5>
+                                <p>Transfer bank, kartu kredit/debit, atau e-wallet</p>
+                            </div>
+                        </div>
+                        <div class="d-flex">
+                            <span class="step-number">3</span>
+                            <div>
+                                <h5>Konfirmasi Pembayaran</h5>
+                                <p>Ikuti instruksi untuk menyelesaikan transaksi</p>
+                            </div>
+                        </div>
+                        <div class="d-flex">
+                            <span class="step-number">4</span>
+                            <div>
+                                <h5>Tunggu Konfirmasi</h5>
+                                <p>Layanan akan dipulihkan otomatis setelah pembayaran terverifikasi</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-lg-6">
+                <div class="notification-card floating" style="animation-delay: 0.4s;">
+                    <div class="card-header bg-success">
+                        <h4><i class="fas fa-wallet"></i> Metode Pembayaran Lainnya</h4>
+                    </div>
+                    <div class="card-body">
+                        <h5><i class="fas fa-university"></i> Transfer Bank</h5>
+                        <ul class="list-unstyled">
+                            <li>Bank ABC: 1234-5678-9012 (PT. Internet Provider)</li>
+                            <li>Bank XYZ: 9876-5432-1098 (PT. Internet Provider)</li>
+                            <li>Bank DEF: 5555-4444-3333 (PT. Internet Provider)</li>
+                        </ul>
+                        
+                        <h5><i class="fas fa-store"></i> Pembayaran Offline</h5>
+                        <ul class="list-unstyled">
+                            <li>Kantor Cabang terdekat</li>
+                            <li>Agen resmi atau mitra pembayaran</li>
+                            <li>Minimarket terdekat (Alfamart, Indomaret)</li>
+                        </ul>
+                        
+                        <div class="contact-info">
+                            <h5><i class="fas fa-headset"></i> Butuh Bantuan?</h5>
+                            <p>Hubungi Customer Service kami:</p>
+                            <p><strong><i class="fas fa-phone"></i> Telepon:</strong> 1500-123</p>
+                            <p><strong><i class="fas fa-envelope"></i> Email:</strong> cs@internetprovider.com</p>
+                            <p><strong><i class="fas fa-clock"></i> Jam Operasi:</strong> 24/7</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <div class="footer">
+            <p>&copy; 2025 Internet Provider.</p>
+        </div>
+    </div>
+
+    <script>
+        // Tambahkan interaktivitas tambahan dengan JavaScript
+        document.addEventListener('DOMContentLoaded', function() {
+            // Animasi saat tombol dihover
+            const buttons = document.querySelectorAll('.btn-payment');
+            buttons.forEach(button => {
+                button.addEventListener('mouseenter', function() {
+                    this.style.transform = 'translateY(-7px) scale(1.05)';
+                });
+                
+                button.addEventListener('mouseleave', function() {
+                    this.style.transform = 'translateY(-5px) scale(1)';
+                });
+            });
+            
+            // Animasi saat kartu dihover
+            const cards = document.querySelectorAll('.notification-card');
+            cards.forEach(card => {
+                card.addEventListener('mouseenter', function() {
+                    this.style.transform = 'translateY(-10px)';
+                });
+                
+                card.addEventListener('mouseleave', function() {
+                    this.style.transform = 'translateY(-5px)';
+                });
+            });
+            
+            // Tambahkan efek ketik pada judul
+            const title = document.querySelector('.header h1');
+            const text = title.innerHTML;
+            title.innerHTML = '';
+            let i = 0;
+            
+            function typeWriter() {
+                if (i < text.length) {
+                    title.innerHTML += text.charAt(i);
+                    i++;
+                    setTimeout(typeWriter, 100);
+                }
+            }
+            
+            // Jalankan efek ketik setelah delay
+            setTimeout(typeWriter, 500);
+        });
+    </script>
+</body>
+</html>
