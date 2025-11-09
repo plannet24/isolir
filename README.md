@@ -1,1 +1,69 @@
-# isolir
+# 🌐 Halaman Notifikasi Isolir Internet
+
+## 📖 Deskripsi
+Halaman **Notifikasi Isolir Internet** adalah solusi profesional dan *user-friendly* untuk menginformasikan status **isolasi sementara layanan internet** akibat keterlambatan pembayaran.  
+Dibangun dengan **CSS murni tanpa framework**, halaman ini menghadirkan pengalaman pengguna yang optimal di berbagai perangkat.
+
+> ⚠️ **Catatan:**  
+> Halaman ini dirancang untuk **mengurangi frustrasi pelanggan** sekaligus **meningkatkan konversi pembayaran tepat waktu**.
+
+---
+
+## 💡 Fitur Utama
+
+### 🎯 Tombol Aksi yang Menonjol
+- Tombol **"BAYAR SEKARANG"** dengan efek *hover* interaktif  
+- Desain **gradient** dan **bayangan** untuk menarik perhatian  
+- Tautan langsung ke halaman pembayaran
+
+---
+
+### 💳 Panduan Pembayaran Terstruktur
+- Langkah-langkah mudah melakukan pembayaran online  
+- Visual dengan **nomor langkah** yang jelas  
+- **Background berbeda** untuk memisahkan konten antar bagian
+
+---
+
+### 🏦 Metode Pembayaran Alternatif
+- **Transfer bank manual**  
+- **Opsi pembayaran offline**  
+- Disertai **informasi rekening** & **lokasi pembayaran**
+
+---
+
+### ☎️ Informasi Kontak
+- **Customer Service** yang siap membantu  
+- Nomor telepon & email **support**  
+- Desain terpisah agar mudah ditemukan oleh pengguna
+
+---
+
+## 📱 Desain Responsif
+Dirancang agar tampil optimal di semua perangkat:
+
+| Perangkat | Layout | Keterangan |
+|------------|---------|------------|
+| 🖥️ **Desktop (≥ 768px)** | Dua kolom | Tampilan luas & informatif |
+| 💻 **Tablet (≈ 768px)** | Adaptif | Elemen menyesuaikan ukuran layar |
+| 📱 **Mobile (< 768px)** | Satu kolom | Navigasi sederhana & fokus pada aksi |
+
+---
+
+## 🛠️ Teknologi yang Digunakan
+| Teknologi | Fungsi |
+|------------|---------|
+| **HTML5** | Struktur halaman |
+| **CSS3 Murni** | Styling tanpa framework |
+| **CSS Grid & Flexbox** | Layout responsif dan fleksibel |
+| **CSS Variables** | Konsistensi warna & styling |
+| **Media Queries** | Penyesuaian tampilan pada berbagai perangkat |
+
+---
+
+✨ **Kesimpulan:**  
+Halaman ini menggabungkan desain modern, komunikasi efektif, dan kemudahan navigasi untuk memastikan pelanggan tetap mendapatkan pengalaman positif — bahkan saat layanan mereka sedang diisolir.
+
+---
+
+📌 *Dibuat dengan cinta dan CSS murni 💙*
