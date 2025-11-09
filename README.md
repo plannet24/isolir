@@ -9,35 +9,6 @@ Dibangun dengan **CSS murni tanpa framework**, halaman ini menghadirkan pengalam
 
 ---
 
-## 💡 Fitur Utama
-
-### 🎯 Tombol Aksi yang Menonjol
-- Tombol **"BAYAR SEKARANG"** dengan efek *hover* interaktif  
-- Desain **gradient** dan **bayangan** untuk menarik perhatian  
-- Tautan langsung ke halaman pembayaran
-
----
-
-### 💳 Panduan Pembayaran Terstruktur
-- Langkah-langkah mudah melakukan pembayaran online  
-- Visual dengan **nomor langkah** yang jelas  
-- **Background berbeda** untuk memisahkan konten antar bagian
-
----
-
-### 🏦 Metode Pembayaran Alternatif
-- **Transfer bank manual**  
-- **Opsi pembayaran offline**  
-- Disertai **informasi rekening** & **lokasi pembayaran**
-
----
-
-### ☎️ Informasi Kontak
-- **Customer Service** yang siap membantu  
-- Nomor telepon & email **support**  
-- Desain terpisah agar mudah ditemukan oleh pengguna
-
----
 
 ## 📱 Desain Responsif
 Dirancang agar tampil optimal di semua perangkat:
