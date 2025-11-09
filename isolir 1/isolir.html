@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Notifikasi Jatuh Tempo Pembayaran</title>
+    <style>
+        :root {
+            --primary-color: #6a11cb;
+            --secondary-color: #2575fc;
+            --danger-color: #dc3545;
+            --warning-color: #ffc107;
+            --success-color: #28a745;
+            --light-color: #f8f9fa;
+            --dark-color: #343a40;
+            --border-radius: 10px;
+            --box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            --transition: all 0.3s ease;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--light-color);
+            color: #333;
+            line-height: 1.6;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+
+        .row {
+            display: flex;
+            flex-wrap: wrap;
+            margin: 0 -15px;
+        }
+
+        .col {
+            flex: 1;
+            padding: 0 15px;
+        }
+
+        .col-lg-6 {
+            width: 100%;
+            padding: 0 15px;
+        }
+
+        .col-lg-8 {
+            width: 100%;
+            padding: 0 15px;
+        }
+
+        /* Header */
+        .header {
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+            color: white;
+            padding: 2rem 0;
+            border-radius: 0 0 20px 20px;
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 2.5rem;
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+        }
+
+        .header p {
+            font-size: 1.25rem;
+            opacity: 0.9;
+        }
+
+        /* Cards */
+        .notification-card {
+            background: white;
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+            margin-bottom: 2rem;
+            overflow: hidden;
+        }
+
+        .card-header {
+            padding: 1rem 1.5rem;
+            background-color: var(--primary-color);
+            color: white;
+        }
+
+        .card-header.bg-success {
+            background-color: var(--success-color) !important;
+        }
+
+        .card-header h4 {
+            margin: 0;
+        }
+
+        .card-body {
+            padding: 1.5rem;
+        }
+
+        .text-center {
+            text-align: center;
+        }
+
+        /* Alert Icon */
+        .alert-icon {
+            font-size: 4rem;
+            color: var(--danger-color);
+            margin-bottom: 1rem;
+        }
+
+        /* Typography */
+        h2 {
+            font-size: 1.75rem;
+            color: var(--danger-color);
+            font-weight: bold;
+            margin-bottom: 1rem;
+        }
+
+        h5 {
+            font-size: 1.25rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .card-text {
+            font-size: 1.1rem;
+            margin-bottom: 1rem;
+        }
+
+        /* Buttons */
+        .btn-payment {
+            display: inline-block;
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            border-radius: 50px;
+            text-decoration: none;
+            transition: var(--transition);
+            cursor: pointer;
+            margin: 1rem 0;
+        }
+
+        .btn-payment:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+
+        /* Alert */
+        .alert {
+            padding: 1rem;
+            border-radius: var(--border-radius);
+            margin-top: 1rem;
+        }
+
+        .alert-warning {
+            background-color: rgba(255, 193, 7, 0.2);
+            border-left: 4px solid var(--warning-color);
+        }
+
+        /* Payment Steps */
+        .payment-steps {
+            background-color: #f1f8ff;
+            border-radius: var(--border-radius);
+            padding: 1.5rem;
+        }
+
+        .d-flex {
+            display: flex;
+            margin-bottom: 1rem;
+        }
+
+        .step-number {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 30px;
+            height: 30px;
+            background-color: var(--secondary-color);
+            color: white;
+            border-radius: 50%;
+            margin-right: 10px;
+            flex-shrink: 0;
+        }
+
+        /* Contact Info */
+        .contact-info {
+            background-color: #e9ecef;
+            border-radius: var(--border-radius);
+            padding: 1.5rem;
+            margin-top: 1rem;
+        }
+
+        /* Footer */
+        .footer {
+            background-color: var(--dark-color);
+            color: white;
+            padding: 2rem 0;
+            margin-top: 2rem;
+            text-align: center;
+        }
+
+        /* List Styling */
+        ul {
+            padding-left: 1rem;
+        }
+
+        ul.list-unstyled {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        ul.list-unstyled li {
+            margin-bottom: 0.5rem;
+        }
+
+        /* Responsive */
+        @media (min-width: 768px) {
+            .header h1 {
+                font-size: 3rem;
+            }
+            
+            .col-lg-6 {
+                width: 50%;
+            }
+            
+            .col-lg-8 {
+                width: 66.666667%;
+            }
+            
+            .justify-content-center {
+                justify-content: center;
+            }
+        }
+
+        @media (max-width: 767px) {
+            .header {
+                padding: 1.5rem 0;
+            }
+            
+            .header h1 {
+                font-size: 2rem;
+            }
+            
+            .header p {
+                font-size: 1rem;
+            }
+            
+            .card-body {
+                padding: 1rem;
+            }
+            
+            .btn-payment {
+                width: 100%;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <div class="header">
+        <div class="container">
+            <h1>Notifikasi Pembayaran</h1>
+            <p>Layanan Internet Anda Saat Ini Terisolasi Sementara</p>
+        </div>
+    </div>
+
+    <div class="container">
+        <!-- Notifikasi Utama -->
+        <div class="row justify-content-center">
+            <div class="col-lg-8">
+                <div class="notification-card">
+                    <div class="card-body text-center">
+                        <div class="alert-icon">⚠️</div>
+                        <h2>Pemberitahuan Jatuh Tempo</h2>
+                        <p class="card-text">
+                            Pelanggan yang terhormat, layanan internet Anda untuk saat ini terisolasi sementara karena keterlambatan pembayaran.
+                        </p>
+                        <p class="card-text">
+                            Segera lakukan pembayaran dengan mengklik tombol di bawah. Anda akan langsung diarahkan ke halaman pembayaran.
+                        </p>
+                        
+                        <div>
+                            <a href="#" class="btn-payment">
+                                BAYAR SEKARANG
+                            </a>
+                        </div>
+                        
+                        <div class="alert alert-warning">
+                            <strong>Perhatian:</strong> Layanan internet akan dipulihkan maksimal 1x24 jam setelah pembayaran terkonfirmasi.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Cara Pembayaran -->
+        <div class="row">
+            <div class="col-lg-6">
+                <div class="notification-card">
+                    <div class="card-header">
+                        <h4>Cara Melakukan Pembayaran</h4>
+                    </div>
+                    <div class="card-body payment-steps">
+                        <div class="d-flex">
+                            <span class="step-number">1</span>
+                            <div>
+                                <h5>Klik Tombol "Bayar Sekarang"</h5>
+                                <p>Anda akan diarahkan ke halaman pembayaran online</p>
+                            </div>
+                        </div>
+                        <div class="d-flex">
+                            <span class="step-number">2</span>
+                            <div>
+                                <h5>Pilih Metode Pembayaran</h5>
+                                <p>Transfer bank, kartu kredit, atau e-wallet</p>
+                            </div>
+                        </div>
+                        <div class="d-flex">
+                            <span class="step-number">3</span>
+                            <div>
+                                <h5>Konfirmasi Pembayaran</h5>
+                                <p>Ikuti instruksi untuk menyelesaikan transaksi</p>
+                            </div>
+                        </div>
+                        <div class="d-flex">
+                            <span class="step-number">4</span>
+                            <div>
+                                <h5>Tunggu Konfirmasi</h5>
+                                <p>Layanan akan dipulihkan setelah pembayaran terverifikasi</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-lg-6">
+                <div class="notification-card">
+                    <div class="card-header bg-success">
+                        <h4>Metode Pembayaran Lainnya</h4>
+                    </div>
+                    <div class="card-body">
+                        <h5>Transfer Bank</h5>
+                        <ul class="list-unstyled">
+                            <li>• Bank ABC: 1234-5678-9012 (PT. Internet Provider)</li>
+                            <li>• Bank XYZ: 9876-5432-1098 (PT. Internet Provider)</li>
+                        </ul>
+                        
+                        <h5>Pembayaran Offline</h5>
+                        <ul class="list-unstyled">
+                            <li>• Kantor Cabang terdekat</li>
+                            <li>• Agen resmi atau mitra pembayaran</li>
+                            <li>• Minimarket terdekat (Alfamart, Indomaret)</li>
+                        </ul>
+                        
+                        <div class="contact-info">
+                            <h5>Butuh Bantuan?</h5>
+                            <p>Hubungi Customer Service:</p>
+                            <p><strong>Telepon:</strong> 1500-123</p>
+                            <p><strong>Email:</strong> cs@internetprovider.com</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <div class="footer">
+        <div class="container">
+            <p>&copy; 2023 Internet Provider. Semua hak dilindungi.</p>
+        </div>
+    </div>
+</body>
+</html>
